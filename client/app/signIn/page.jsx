@@ -19,7 +19,9 @@ const SignIn = () => {
 
         const response = await axios.post('http://localhost:8000/signin', data)
 
-        if (response.data.response.status === 200) {
+        if (response.data.response.message === 'Please Verify Your Account') {
+            router.push('/signUpVerify')
+        } else if (response.data.response.message === 'Sign In Successful, OTP Sent To Mail') {
             console.log(response.data.response);
             setCookie('userName', response.data.response.userName)
             setCookie('token', response.data.response.token)
