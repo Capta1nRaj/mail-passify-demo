@@ -1,49 +1,56 @@
 'use client'
 
-import axios from 'axios'
-import React, { useState } from 'react'
-import { setCookie } from 'cookies-next';
-import { useRouter } from 'next/navigation'
-import Link from 'next/link';
+import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import axios from 'axios';
+import { getCookie, setCookie } from 'cookies-next';
 
-const SignUp = () => {
-
+const SignUP = () => {
     const router = useRouter();
 
-    const [fullName, setfullName] = useState('')
-    const [userName, setuserName] = useState('')
-    const [userEmail, setuserEmail] = useState('')
-    const [userPassword, setuserPassword] = useState('')
-    const [referralCode, setreferralCode] = useState('')
+    const [formData, setFormData] = useState({
+        userFullName: '',
+        userName: '',
+        userEmail: '',
+        userPassword: '',
+        userReferredBy: '',
+    });
 
-    async function signUpUser() {
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
 
-        const data = { fullName, userName, userEmail, userPassword, referralCode }
-
-        const response = await axios.post('http://localhost:8000/signup', data)
-
+    const signUp = async () => {
+        const data = { ...formData };
+        const response = await axios.post('http://localhost:8000/signUp', data)
+        console.log(response.data.response)
         if (response.data.response.status === 201) {
-            console.log(response.data.response);
-            setCookie('userName', response.data.response.userName)
-            router.push('/signUpVerify')
+            setCookie('userName', data.userName)
+            router.push(`/signUpVerify`);
         } else {
-            console.log(response.data.response);
+            console.log("Error In signUP Page.")
         }
-    }
+    };
 
     return (
-        <>
-            <div className='flex flex-col w-1/4 m-auto gap-8 mt-2'>
-                <input className='pl-4 py-2 text-black' type="text" placeholder='fullName' value={fullName} onChange={(e) => setfullName(e.target.value)} />
-                <input className='pl-4 py-2 text-black' type="text" placeholder='userName' value={userName} onChange={(e) => setuserName(e.target.value)} />
-                <input className='pl-4 py-2 text-black' type="text" placeholder='userEmail' value={userEmail} onChange={(e) => setuserEmail(e.target.value)} />
-                <input className='pl-4 py-2 text-black' type="text" placeholder='userPassword' value={userPassword} onChange={(e) => setuserPassword(e.target.value)} />
-                <input className='pl-4 py-2 text-black' type="text" placeholder='referralCode' value={referralCode} onChange={(e) => setreferralCode(e.target.value)} />
-                <button onClick={signUpUser}>Sign UP</button>
-                <div className='text-center'><Link href={'/signIn'}>Already have an acc? Sign IN.</Link></div>
+        <div className='absolute top-1/2 left-1/2 right-0 bottom-0 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-5 text-black'>
+            {Object.entries(formData).map(([key, value]) => (
+                <input
+                    key={key}
+                    name={key}
+                    className='pl-5 py-2 w-1/2'
+                    type="text"
+                    value={value}
+                    onChange={handleChange}
+                    placeholder={key}
+                />
+            ))}
+            <div className='cursor-pointer text-white' onClick={signUp}>
+                SignUP
             </div>
-        </>
-    )
-}
+        </div>
+    );
+};
 
-export default SignUp
+export default SignUP;

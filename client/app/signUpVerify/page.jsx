@@ -1,54 +1,54 @@
 'use client'
 
-import axios from 'axios'
-import React, { useState } from 'react'
-import { getCookie } from 'cookies-next';
-import { useRouter } from 'next/navigation'
+import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import axios from 'axios';
+import { getCookie, setCookie } from 'cookies-next';
 
-const signUpVerify = () => {
+const SignUPVerify = () => {
 
     const router = useRouter();
 
-    const userName = getCookie('userName');
-    const [OTP, setOTP] = useState('')
+    const userName = getCookie('userName')
 
+    const [formData, setFormData] = useState({
+        userOTP: '',
+    });
 
-    async function signUpVerifyUser() {
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
 
-        const data = { userName, OTP }
-
+    const signUpVerify = async () => {
+        const data = { userName, ...formData };
         const response = await axios.post('http://localhost:8000/signUpVerify', data)
-
-        console.log(response.data.response);
-
-        if (response.data.response.status === 200) {
-            router.push('/')
+        console.log(response.data.response)
+        if (response.data.response.status === 202) {
+            router.push(`/`);
         } else {
-            console.log("signUpVerify Called At Else Condition Here.");
+            console.log("Error In signUpVerify Page.")
         }
-    }
-
-    async function resendOTP() {
-
-        const functionPerformed = 'newUserVerification'
-
-        const data = { userName, functionPerformed }
-
-        const response = await axios.post('http://localhost:8000/resendOTP', data)
-
-        console.log(response.data.response);
-    }
+    };
 
     return (
-        <>
-            <div className='flex flex-col w-1/4 m-auto gap-8 mt-2'>
-                <input className='pl-4 py-2 text-black' type="text" placeholder='OTP' value={OTP} onChange={(e) => setOTP(e.target.value)} />
-                <button onClick={resendOTP}> Resend OTP </button>
-                <button onClick={signUpVerifyUser}>Sign UP Verify User</button>
+        <div className='absolute top-1/2 left-1/2 right-0 bottom-0 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-5 text-black'>
+            {Object.entries(formData).map(([key, value]) => (
+                <input
+                    key={key}
+                    name={key}
+                    className='pl-5 py-2 w-1/2'
+                    type="text"
+                    value={value}
+                    onChange={handleChange}
+                    placeholder={key}
+                />
+            ))}
+            <div className='cursor-pointer text-white' onClick={signUpVerify}>
+                SignUP Verify
             </div>
+        </div>
+    );
+};
 
-        </>
-    )
-}
-
-export default signUpVerify
+export default SignUPVerify;

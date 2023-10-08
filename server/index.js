@@ -25,97 +25,23 @@ app.get('/', async (req, res, next) => {
     })
 });
 
-// Sign UP User
-app.post('/signup', async (req, res, next) => {
+// signup User
+app.post('/signUp', async (req, res, next) => {
     const data = req.body;
-    const response = await signup(data.fullName, data.userName, data.userEmail, data.userPassword, data.referralCode)
+    const response = await signup(data.userFullName, data.userName, data.userEmail, data.userPassword, data.userReferredBy)
     return res.json({
         response
     })
-
 });
 
-// Sign UP Verify
+// signUpVerify User
 app.post('/signUpVerify', async (req, res, next) => {
     const data = req.body;
-    const response = await signUpVerify(data.userName, data.OTP)
+    const response = await signUpVerify(data.userName, data.userOTP)
     return res.json({
         response
     })
 });
-
-// Sign In
-app.post('/signin', async (req, res, next) => {
-    const data = req.body;
-    const response = await signin(data.userName, data.password)
-    return res.json({
-        response
-    })
-});
-
-// Sign In Verify
-app.post('/signInVerify', async (req, res, next) => {
-    const data = req.body;
-    const response = await signInVerify(data.userName, data.OTP)
-    return res.json({
-        response
-    })
-});
-
-// Sign In Verify
-app.post('/autoSignIn', async (req, res, next) => {
-    const data = req.body;
-    const response = await autoSignIn(data.userName, data.token)
-    return res.json({
-        response
-    })
-});
-
-// Resend OTP
-app.post('/resendOTP', async (req, res, next) => {
-    const data = req.body;
-    const response = await resendOTP(data.userName, data.functionPerformed, data.token)
-    return res.json({
-        response
-    })
-});
-
-// Forgot Password (Get OTP)
-app.post('/getOTP', async (req, res, next) => {
-    const data = req.body;
-    const response = await forgotPassword(data.userName)
-    return res.json({
-        response
-    })
-});
-
-// Forgot Password (Update Password)
-app.post('/updatePassword', async (req, res, next) => {
-    const data = req.body;
-    const response = await forgotPassword(data.userName, data.otp, data.newPassword)
-    return res.json({
-        response
-    })
-});
-
-// Logout From Current Device
-app.post('/logoutOnce', async (req, res, next) => {
-    const data = req.body;
-    const response = await logoutOnce(data.userName, data.token)
-    return res.json({
-        response
-    })
-});
-
-// Logout From All Devices
-app.post('/logoutAll', async (req, res, next) => {
-    const data = req.body;
-    const response = await logoutAll(data.userName, data.token)
-    return res.json({
-        response
-    })
-});
-
 
 app.listen(PORT, () => {
     console.log("Running on port", PORT);
