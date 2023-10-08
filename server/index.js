@@ -25,7 +25,7 @@ app.get('/', async (req, res, next) => {
     })
 });
 
-// signup User
+// signUp User
 app.post('/signUp', async (req, res, next) => {
     const data = req.body;
     const response = await signup(data.userFullName, data.userName, data.userEmail, data.userPassword, data.userReferredBy)
@@ -38,6 +38,24 @@ app.post('/signUp', async (req, res, next) => {
 app.post('/signUpVerify', async (req, res, next) => {
     const data = req.body;
     const response = await signUpVerify(data.userName, data.userOTP)
+    return res.json({
+        response
+    })
+});
+
+// signIn User
+app.post('/signIn', async (req, res, next) => {
+    const data = req.body;
+    const response = await signin(data.userName, data.userPassword)
+    return res.json({
+        response
+    })
+});
+
+// signInVerify User
+app.post('/signInVerify', async (req, res, next) => {
+    const data = req.body;
+    const response = await signInVerify(data.userName, data.userOTP, data.userId)
     return res.json({
         response
     })

@@ -5,11 +5,12 @@ import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { getCookie, setCookie } from 'cookies-next';
 
-const SignUPVerify = () => {
+const SignINVerify = () => {
 
     const router = useRouter();
 
     const userName = getCookie('userName')
+    const userId = getCookie('id')
 
     const [formData, setFormData] = useState({
         userOTP: '',
@@ -20,15 +21,14 @@ const SignUPVerify = () => {
         setFormData({ ...formData, [name]: value });
     };
 
-    const signUpVerify = async () => {
-        const data = { userName, ...formData };
-        const response = await axios.post('http://localhost:8000/signUpVerify', data)
+    const signInVerify = async () => {
+        const data = { userName, userId, ...formData };
+        const response = await axios.post('http://localhost:8000/signInVerify', data)
+        console.log(response.data.response)
         if (response.data.response.status === 202) {
-            console.log(response.data.response)
             router.push(`/`);
         } else {
-            console.log(response.data.response.message)
-            console.log("Error In signUpVerify Page.")
+            console.log("Error In signInVerify Page.")
         }
     };
 
@@ -45,11 +45,11 @@ const SignUPVerify = () => {
                     placeholder={key}
                 />
             ))}
-            <div className='cursor-pointer text-white' onClick={signUpVerify}>
+            <div className='cursor-pointer text-white' onClick={signInVerify}>
                 SignUP Verify
             </div>
         </div>
     );
 };
 
-export default SignUPVerify;
+export default SignINVerify;

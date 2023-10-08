@@ -5,14 +5,12 @@ import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { getCookie, setCookie } from 'cookies-next';
 
-const SignUPVerify = () => {
-
+const SignIN = () => {
     const router = useRouter();
 
-    const userName = getCookie('userName')
-
     const [formData, setFormData] = useState({
-        userOTP: '',
+        userName: '',
+        userPassword: '',
     });
 
     const handleChange = (e) => {
@@ -20,15 +18,18 @@ const SignUPVerify = () => {
         setFormData({ ...formData, [name]: value });
     };
 
-    const signUpVerify = async () => {
-        const data = { userName, ...formData };
-        const response = await axios.post('http://localhost:8000/signUpVerify', data)
-        if (response.data.response.status === 202) {
+    const SignIn = async () => {
+        const data = { ...formData };
+        const response = await axios.post('http://localhost:8000/signIn', data)
+        if (response.data.response.status === 201) {
             console.log(response.data.response)
-            router.push(`/`);
+            setCookie('userName', response.data.response.userName)
+            setCookie('token', response.data.response.token)
+            setCookie('id', response.data.response.id)
+            router.push(`/signInVerify`);
         } else {
             console.log(response.data.response.message)
-            console.log("Error In signUpVerify Page.")
+            console.log("Error In signIn Page.")
         }
     };
 
@@ -45,11 +46,11 @@ const SignUPVerify = () => {
                     placeholder={key}
                 />
             ))}
-            <div className='cursor-pointer text-white' onClick={signUpVerify}>
-                SignUP Verify
+            <div className='cursor-pointer text-white' onClick={SignIn}>
+                SignIn
             </div>
         </div>
     );
 };
 
-export default SignUPVerify;
+export default SignIN;
