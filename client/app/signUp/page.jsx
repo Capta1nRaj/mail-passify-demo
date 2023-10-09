@@ -1,9 +1,10 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { getCookie, setCookie } from 'cookies-next';
+import autoSignInCheck from '../autoSignInCheck';
 
 const SignUP = () => {
     const router = useRouter();
@@ -32,6 +33,21 @@ const SignUP = () => {
             console.log("Error In signUP Page.")
         }
     };
+
+    async function checkSession() {
+        const response = await autoSignInCheck()
+        if (response.status === 202) {
+            router.push(`/`);
+            console.log(response.message)
+            return response.message
+        }
+        console.log(response.message)
+        return response.message
+    }
+
+    useEffect(() => {
+        checkSession()
+    }, [])
 
     return (
         <div className='absolute top-1/2 left-1/2 right-0 bottom-0 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-5 text-black'>

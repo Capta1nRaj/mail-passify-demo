@@ -61,6 +61,15 @@ app.post('/signInVerify', async (req, res, next) => {
     })
 });
 
+// autoSignIn Check
+app.post('/autoSignIn', async (req, res, next) => {
+    const data = req.body;
+    const response = await autoSignIn(data.userName, data.userToken, data.userId)
+    return res.json({
+        response
+    })
+});
+
 app.listen(PORT, () => {
     console.log("Running on port", PORT);
 });

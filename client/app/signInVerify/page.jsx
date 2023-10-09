@@ -46,7 +46,7 @@ const SignINVerify = () => {
                 />
             ))}
             <div className='cursor-pointer text-white' onClick={signInVerify}>
-                SignUP Verify
+                SignIN Verify
             </div>
         </div>
     );
