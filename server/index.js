@@ -70,6 +70,24 @@ app.post('/autoSignIn', async (req, res, next) => {
     })
 });
 
+// logoutOnce Check
+app.post('/logoutOnce', async (req, res, next) => {
+    const data = req.body;
+    const response = await logoutOnce(data.userName, data.userToken, data.userId)
+    return res.json({
+        response
+    })
+});
+
+// logoutAll Check
+app.post('/logoutAll', async (req, res, next) => {
+    const data = req.body;
+    const response = await logoutAll(data.userName, data.userToken, data.userId)
+    return res.json({
+        response
+    })
+});
+
 app.listen(PORT, () => {
     console.log("Running on port", PORT);
 });
