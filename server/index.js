@@ -70,7 +70,7 @@ app.post('/autoSignIn', async (req, res, next) => {
     })
 });
 
-// logoutOnce Check
+// logoutOnce User
 app.post('/logoutOnce', async (req, res, next) => {
     const data = req.body;
     const response = await logoutOnce(data.userName, data.userToken, data.userId)
@@ -79,10 +79,28 @@ app.post('/logoutOnce', async (req, res, next) => {
     })
 });
 
-// logoutAll Check
+// logoutAll User
 app.post('/logoutAll', async (req, res, next) => {
     const data = req.body;
     const response = await logoutAll(data.userName, data.userToken, data.userId)
+    return res.json({
+        response
+    })
+});
+
+// resendOTP
+app.post('/resendOTP', async (req, res, next) => {
+    const data = req.body;
+    const response = await resendOTP(data.userName, data.method, data.userToken, data.userId)
+    return res.json({
+        response
+    })
+});
+
+// forgotPassword
+app.post('/forgotPassword', async (req, res, next) => {
+    const data = req.body;
+    const response = await forgotPassword(data.userName, data.userOTP, data.userPassword)
     return res.json({
         response
     })

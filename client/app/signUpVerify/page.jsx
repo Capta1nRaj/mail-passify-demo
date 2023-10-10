@@ -32,23 +32,49 @@ const SignUPVerify = () => {
         }
     };
 
+    const resendOTP = async () => {
+        const method = 'newUserVerification';
+        const data = { userName, method };
+        const response = await axios.post('http://localhost:8000/resendOTP', data)
+        const message = response.data.response.message;
+        if (response.data.response.status === 201) {
+            console.log(message)
+        } else if (response.data.response.status === 401) {
+            console.log(message)
+        } else if (response.data.response.status === 403) {
+            console.log(message)
+        } else {
+            console.log("Error In signUpVerify resendOTP Function.")
+        }
+
+    }
+
     return (
-        <div className='absolute top-1/2 left-1/2 right-0 bottom-0 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-5 text-black'>
-            {Object.entries(formData).map(([key, value]) => (
-                <input
-                    key={key}
-                    name={key}
-                    className='pl-5 py-2 w-1/2'
-                    type="text"
-                    value={value}
-                    onChange={handleChange}
-                    placeholder={key}
-                />
-            ))}
-            <div className='cursor-pointer text-white' onClick={signUpVerify}>
-                SignUP Verify
+        <>
+
+            <div className='absolute top-1/2 left-1/2 right-0 bottom-0 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-5 text-black'>
+                {Object.entries(formData).map(([key, value]) => (
+                    <input
+                        key={key}
+                        name={key}
+                        className='pl-5 py-2 w-1/2'
+                        type="text"
+                        value={value}
+                        onChange={handleChange}
+                        placeholder={key}
+                    />
+                ))}
+
+                <button className='cursor-pointer text-white' onClick={signUpVerify}>
+                    SignUP Verify
+                </button>
+
+                <button className='cursor-pointer text-white' onClick={resendOTP}>
+                    Resend OTP
+                </button>
             </div>
-        </div>
+
+        </>
     );
 };
 

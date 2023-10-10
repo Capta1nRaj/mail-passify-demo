@@ -9,6 +9,10 @@ import autoSignInCheck from '../autoSignInCheck';
 const SignUP = () => {
     const router = useRouter();
 
+    const userName = getCookie('userName')
+    const userToken = getCookie('token')
+    const userId = getCookie('id')
+
     const [formData, setFormData] = useState({
         userFullName: '',
         userName: '',
@@ -35,7 +39,7 @@ const SignUP = () => {
     };
 
     async function checkSession() {
-        const response = await autoSignInCheck()
+        const response = await autoSignInCheck(userName, userToken, userId)
         if (response.status === 202) {
             router.push(`/`);
             console.log(response.message)

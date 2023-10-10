@@ -10,11 +10,15 @@ export default function Home() {
 
   const router = useRouter();
 
+  const userName = getCookie('userName')
+  const userToken = getCookie('token')
+  const userId = getCookie('id')
+
   const [UserName, setUserName] = useState('')
 
   async function checkSession() {
 
-    const response = await autoSignInCheck()
+    const response = await autoSignInCheck(userName, userToken, userId)
 
     if (response.status === 202) {
       console.log(response.message)
@@ -29,12 +33,8 @@ export default function Home() {
   }
 
   useEffect(() => {
-    checkSession()
+    checkSession();
   }, [])
-
-  const userName = getCookie('userName')
-  const userToken = getCookie('token')
-  const userId = getCookie('id')
 
   async function logoutOnce() {
 
