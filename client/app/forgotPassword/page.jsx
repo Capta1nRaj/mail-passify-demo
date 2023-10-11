@@ -35,7 +35,7 @@ const ForgotPassword = () => {
 
         const method = 'forgotPassword';
 
-        const data = { userName, method, userOTP, userPassword };
+        const data = { userName, method };
 
         const response = await axios.post('http://localhost:8000/resendOTP', data)
 

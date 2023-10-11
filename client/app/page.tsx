@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import autoSignInCheck from './autoSignInCheck'
+import sessionCheck from './sessionCheck '
 import { getCookie } from 'cookies-next'
 import { useRouter } from 'next/navigation';
 import axios from 'axios'
@@ -18,7 +18,7 @@ export default function Home() {
 
   async function checkSession() {
 
-    const response = await autoSignInCheck(userName, userToken, userId)
+    const response = await sessionCheck(userName, userToken, userId)
 
     if (response.status === 202) {
       console.log(response.message)

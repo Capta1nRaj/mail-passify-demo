@@ -4,7 +4,7 @@ const app = express();
 const dotenv = require('dotenv');
 dotenv.config();
 const bodyParser = require('body-parser')
-const { signup, signUpVerify, signin, signInVerify, autoSignIn, resendOTP, forgotPassword, logoutOnce, logoutAll } = require("mail-passify");
+const { signup, signUpVerify, signin, signInVerify, resendOTP, forgotPassword, logoutOnce, logoutAll, sessionCheck } = require("mail-passify");
 
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -64,7 +64,7 @@ app.post('/signInVerify', async (req, res, next) => {
 // autoSignIn Check
 app.post('/autoSignIn', async (req, res, next) => {
     const data = req.body;
-    const response = await autoSignIn(data.userName, data.userToken, data.userId)
+    const response = await sessionCheck(data.userName, data.userToken, data.userId)
     return res.json({
         response
     })

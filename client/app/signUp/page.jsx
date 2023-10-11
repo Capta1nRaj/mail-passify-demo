@@ -4,7 +4,8 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { getCookie, setCookie } from 'cookies-next';
-import autoSignInCheck from '../autoSignInCheck';
+import sessionCheck from '../sessionCheck ';
+import Link from 'next/link';
 
 const SignUP = () => {
     const router = useRouter();
@@ -39,7 +40,7 @@ const SignUP = () => {
     };
 
     async function checkSession() {
-        const response = await autoSignInCheck(userName, userToken, userId)
+        const response = await sessionCheck(userName, userToken, userId)
         if (response.status === 202) {
             router.push(`/`);
             console.log(response.message)
@@ -66,9 +67,15 @@ const SignUP = () => {
                     placeholder={key}
                 />
             ))}
+
             <div className='cursor-pointer text-white' onClick={signUp}>
                 SignUP
             </div>
+
+            <Link href="/signIn" className='cursor-pointer text-white'>
+                Alread have an acc? SignIn Here!
+            </Link>
+
         </div>
     );
 };

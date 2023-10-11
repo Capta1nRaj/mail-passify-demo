@@ -24,11 +24,13 @@ const SignUPVerify = () => {
         const data = { userName, ...formData };
         const response = await axios.post('http://localhost:8000/signUpVerify', data)
         if (response.data.response.status === 202) {
-            console.log(response.data.response)
+            console.log(response.data.response);
             router.push(`/`);
+            return;;
         } else {
-            console.log(response.data.response.message)
-            console.log("Error In signUpVerify Page.")
+            console.log(response.data.response.message);
+            console.log("Error In signUpVerify Page.");
+            return;;
         }
     };
 
@@ -38,13 +40,17 @@ const SignUPVerify = () => {
         const response = await axios.post('http://localhost:8000/resendOTP', data)
         const message = response.data.response.message;
         if (response.data.response.status === 201) {
-            console.log(message)
+            console.log(message);
+            return;
         } else if (response.data.response.status === 401) {
-            console.log(message)
+            console.log(message);
+            return;
         } else if (response.data.response.status === 403) {
-            console.log(message)
+            console.log(message);
+            return;
         } else {
-            console.log("Error In signUpVerify resendOTP Function.")
+            console.log("Error In signUpVerify resendOTP Function.");
+            return;
         }
 
     }

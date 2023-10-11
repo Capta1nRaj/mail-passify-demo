@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { getCookie, setCookie } from 'cookies-next';
-import autoSignInCheck from '../autoSignInCheck';
+import sessionCheck from '../sessionCheck ';
 import Link from 'next/link';
 
 const SignIN = () => {
@@ -34,14 +34,20 @@ const SignIN = () => {
             setCookie('token', response.data.response.token)
             setCookie('id', response.data.response.id)
             router.push(`/signInVerify`);
+            return;
+        } else if (response.data.response.status === 401) {
+            console.log(response.data.response)
+            router.push(`/signUpVerify`);
+            return;
         } else {
             console.log(response.data.response.message)
             console.log("Error In signIn Page.")
+            return;
         }
     };
 
     async function checkSession() {
-        const response = await autoSignInCheck(userName, userToken, userId)
+        const response = await sessionCheck(userName, userToken, userId)
         if (response.status === 202) {
             router.push(`/`);
             console.log(response.message)
@@ -74,6 +80,10 @@ const SignIN = () => {
                 <button className='cursor-pointer text-white' onClick={SignIn}>
                     SignIn
                 </button>
+
+                <Link href="/signUp" className='cursor-pointer text-white'>
+                    No Acc? SignUp Here!
+                </Link>
 
                 <Link href="/forgotPassword" className='cursor-pointer text-white'>
                     Forgot Password
