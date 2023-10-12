@@ -66,4 +66,4 @@ This will update your referral points values in your MongoDB database.
 
 Start the client folder with the command **yarn dev** and the server folder with **nodemon index.js**.
 
-### Feel free to raise an issue if you find any bugs. Thanks in advance. 😁
+Feel free to raise an issue if you find any bugs. Thanks in advance! 😁
