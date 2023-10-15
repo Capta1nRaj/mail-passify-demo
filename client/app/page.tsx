@@ -40,7 +40,7 @@ export default function Home() {
 
     const data = { userName, userToken, userId }
 
-    const response = await axios.post('http://localhost:8000/logoutOnce', data)
+    const response = await axios.post('http://localhost:3000/api/logoutOnce', data)
 
     if (response.data.response.status = 200) {
       console.log(response.data.response.message)
@@ -55,7 +55,7 @@ export default function Home() {
   async function logoutAll() {
     const data = { userName, userToken, userId }
 
-    const response = await axios.post('http://localhost:8000/logoutAll', data)
+    const response = await axios.post('http://localhost:3000/api/logoutAll', data)
 
     if (response.data.response.status = 200) {
       console.log(response.data.response.message)

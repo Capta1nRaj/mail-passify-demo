@@ -15,7 +15,7 @@ const ForgotPassword = () => {
 
         const data = { userName }
 
-        const response = await axios.post('http://localhost:8000/forgotPassword', data)
+        const response = await axios.post('http://localhost:3000/api/forgotPassword', data)
 
         const message = response.data.response.message;
 
@@ -37,7 +37,7 @@ const ForgotPassword = () => {
 
         const data = { userName, method };
 
-        const response = await axios.post('http://localhost:8000/resendOTP', data)
+        const response = await axios.post('http://localhost:3000/api/resendOTP', data)
 
         const message = response.data.response.message;
 
@@ -57,7 +57,7 @@ const ForgotPassword = () => {
 
         const data = { userName, userOTP, userPassword }
 
-        const response = await axios.post('http://localhost:8000/forgotPassword', data)
+        const response = await axios.post('http://localhost:3000/api/forgotPassword', data)
 
         const message = response.data.response.message;
 

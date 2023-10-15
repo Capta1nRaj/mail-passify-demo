@@ -24,7 +24,7 @@ const SignINVerify = () => {
 
     const signInVerify = async () => {
         const data = { userName, userId, ...formData };
-        const response = await axios.post('http://localhost:8000/signInVerify', data)
+        const response = await axios.post('http://localhost:3000/api/signInVerify', data)
         console.log(response.data.response)
         if (response.data.response.status === 202) {
             router.push(`/`);
@@ -36,7 +36,7 @@ const SignINVerify = () => {
     const resendOTP = async () => {
         const method = 'oldUserVerification';
         const data = { userName, method, userToken, userId };
-        const response = await axios.post('http://localhost:8000/resendOTP', data)
+        const response = await axios.post('http://localhost:3000/api/resendOTP', data)
         const message = response.data.response.message;
         if (response.data.response.status === 201) {
             console.log(message)
