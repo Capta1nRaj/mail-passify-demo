@@ -22,7 +22,7 @@ const SignUPVerify = () => {
 
     const signUpVerify = async () => {
         const data = { userName, ...formData };
-        const response = await axios.post('http://localhost:3000/api/signUpVerify', data)
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_DOMAIN}/signUpVerify`, data)
         if (response.data.response.status === 202) {
             console.log(response.data.response);
             router.push(`/`);
@@ -37,7 +37,7 @@ const SignUPVerify = () => {
     const resendOTP = async () => {
         const method = 'newUserVerification';
         const data = { userName, method };
-        const response = await axios.post('http://localhost:3000/api/resendOTP', data)
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_DOMAIN}/resendOTP`, data)
         const message = response.data.response.message;
         if (response.data.response.status === 201) {
             console.log(message);

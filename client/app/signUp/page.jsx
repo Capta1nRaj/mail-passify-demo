@@ -29,7 +29,7 @@ const SignUP = () => {
 
     const signUp = async () => {
         const data = { ...formData };
-        const response = await axios.post('http://localhost:3000/api/signUp', data)
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_DOMAIN}/signUp`, data)
         console.log(response.data.response)
         if (response.data.response.status === 201) {
             setCookie('userName', data.userName)
