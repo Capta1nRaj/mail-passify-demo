@@ -4,14 +4,18 @@ Hey guys, hope you're all doing fine. This is a demo repository for my npm packa
 
 ## Step 1:-
 
-Start by creating a **.env** in **server folder** with these values:-
+There are **.env.sample** file already included in both folder, just change the name to **.env**.
 
+### Note:-
+
+If you want to use this module in **Next.js**, in your .env use this value:-
 ```js
-MONGODB_URI = YOUR_MONGODB_URI (mongodb://127.0.0.1:27017/DB-NAME)
-SENDGRID_API_KEY = YOUR_SENDGRID_API_KEY
-SENDGRID_EMAIL_ID = YOUR_SENDGRID_EMAIL_ID
-SECRET_KEY = YOUR_SECRET_KEY_FOR_ENCRYPTION
-SECRET_IV = YOUR_SECRET_IV_FOR_ENCRYPTION
+NEXT_PUBLIC_DOMAIN = http://localhost:3000/api
+```
+
+Else if you want to use this module in **Node.js**, then modify the above value with the following:-
+```js
+NEXT_PUBLIC_DOMAIN = http://localhost:8000/
 ```
 
 ## Step 2:-
@@ -64,6 +68,6 @@ This will update your referral points values in your MongoDB database.
 
 ## Step 4:-
 
-Start the client folder with the command **yarn dev** and the server folder with **nodemon index.js**.
+Start the client folder with the command **yarn dev** and the server folder with **nodemon index.js**, depends on your usage.
 
 Feel free to raise an issue if you find any bugs. Thanks in advance! 😁

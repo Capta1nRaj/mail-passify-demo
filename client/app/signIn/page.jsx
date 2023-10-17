@@ -37,6 +37,9 @@ const SignIN = () => {
             return;
         } else if (response.data.response.status === 401) {
             console.log(response.data.response)
+            setCookie('userName', response.data.response.userName)
+            setCookie('token', response.data.response.token)
+            setCookie('id', response.data.response.id)
             router.push(`/signUpVerify`);
             return;
         } else {

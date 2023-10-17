@@ -36,6 +36,7 @@ const ForgotPassword = () => {
         const method = 'forgotPassword';
 
         const data = { userName, method };
+        console.log(data)
 
         const response = await axios.post(`${process.env.NEXT_PUBLIC_DOMAIN}/resendOTP`, data)
 
@@ -58,7 +59,7 @@ const ForgotPassword = () => {
         const data = { userName, userOTP, userPassword }
 
         const response = await axios.post(`${process.env.NEXT_PUBLIC_DOMAIN}/forgotPassword`, data)
-
+        console.log(response.data.response)
         const message = response.data.response.message;
 
         if (response.data.response.status === 200) {
@@ -67,6 +68,8 @@ const ForgotPassword = () => {
         } else if (response.data.response.status === 400) {
             console.log(message)
         } else if (response.data.response.status === 401) {
+            console.log(message)
+        } else if (response.data.response.status === 206) {
             console.log(message)
         }
 
