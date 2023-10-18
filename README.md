@@ -1,4 +1,4 @@
-# MAIL-PASSIFY Demo
+# Mail Passify Demo
 
 Hey guys, hope you're all doing fine. This is a demo repository for my npm package, **mail-passify**. Please read the steps to proceed.
 
@@ -9,18 +9,20 @@ There are **.env.sample** file already included in both folder, just change the 
 ### Note:-
 
 If you want to use this module in **Next.js**, in your .env use this value:-
+
 ```js
 NEXT_PUBLIC_DOMAIN = http://localhost:3000/api
 ```
 
 Else if you want to use this module in **Node.js**, then modify the above value with the following:-
+
 ```js
 NEXT_PUBLIC_DOMAIN = http://localhost:8000/
 ```
 
 ## Step 2:-
 
-Run **npm i** in both folders.
+Run **npm i** in both folders, delends on how you want to use it.
 
 ## Step 3:-
 
@@ -68,6 +70,6 @@ This will update your referral points values in your MongoDB database.
 
 ## Step 4:-
 
-Start the client folder with the command **yarn dev** and the server folder with **nodemon index.js**, depends on your usage.
+Start the client folder with the command **yarn dev** & the server folder with **nodemon index.js**, depends on your usage.
 
 Feel free to raise an issue if you find any bugs. Thanks in advance! 😁
