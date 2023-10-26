@@ -32,10 +32,6 @@ export default function Home() {
 
   }
 
-  useEffect(() => {
-    checkSession();
-  }, [])
-
   async function logoutOnce() {
 
     const data = { userName, userToken, userId }
@@ -65,6 +61,10 @@ export default function Home() {
     console.log(response.data.response.message)
     return;
   }
+
+  useEffect(() => {
+    checkSession();
+  }, [])
 
   return (
     <>
