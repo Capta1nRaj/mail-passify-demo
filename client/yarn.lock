@@ -2406,10 +2406,10 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
-mail-passify@^3.1.9-beta.0:
-  version "3.1.9-beta.0"
-  resolved "https://registry.npmjs.org/mail-passify/-/mail-passify-3.1.9-beta.0.tgz"
-  integrity sha512-cuS0CKfkN3y+HG1s522Jy+x5chD3T3xNS7C3D/cwBgMiunZeBsHvAnpXwqXguOZ3d2ST8slK4VugD0Ndq5Bksw==
+mail-passify@^3.2.0-beta.0:
+  version "3.2.0-beta.0"
+  resolved "https://registry.npmjs.org/mail-passify/-/mail-passify-3.2.0-beta.0.tgz"
+  integrity sha512-095dPgnlKAR54uzkzoPgfj836+G+VkRtPYuc5n3JPaxEnPyRtxlkY8hk+wlbOF58JzZBKz8N1OQyL70DJ+d4HQ==
   dependencies:
     "@react-email/render" "^0.0.7"
     "@sendgrid/mail" "^7.7.0"
